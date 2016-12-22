@@ -16,8 +16,10 @@ client.on('message', (topic, message) => {
   if(topic === 'fhem') {
     var stringMessage = message.toString();
     var jsonMessage = JSON.parse(stringMessage);
-    updateState(jsonMessage);
-    console.log('fhem message');
+    if (jsonMessage.device === 'powernode') {
+      updateState({device: "KU.STECKDOSE_1", state: jsonMessage.state});
+      console.log('fhem message');
+    }
   }
 });
 
