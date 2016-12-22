@@ -18,7 +18,6 @@ client.on('message', (topic, message) => {
     var jsonMessage = JSON.parse(stringMessage);
     if (jsonMessage.device === 'powernode') {
       updateState({device: "KU.STECKDOSE_1", state: jsonMessage.state});
-      console.log('fhem message');
     }
   }
 });
@@ -26,6 +25,7 @@ client.on('message', (topic, message) => {
 function updateState(jsonMessage) {
   var device = jsonMessage.device;
   var state = jsonMessage.state;
+  console.log("Turning " + device + " " + state);
   var url = baseUrl + "/fhem?cmd." + device + "=set%20" + device + "%20" + state;
   http.get(url , function(response) {
     });
