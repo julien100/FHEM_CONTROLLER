@@ -1,7 +1,7 @@
 // controller.js
 const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://localhost');
-const baseUrl = "localhost:8083";
+const baseUrl = "http://localhost:8083";
 var http = require('http');
 const querystring = require('querystring');
 
