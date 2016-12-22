@@ -26,13 +26,5 @@ function updateState(jsonMessage) {
   var state = jsonMessage.state;
   var url = baseUrl + "/fhem?cmd." + device + "=set%20" + device + "%20" + state;
   http.get(url , function(response) {
-        var body = '';
-        response.on('data', function(d) {
-            body += d;
-        });
-        response.on('end', function() {
-            var parsed = JSON.parse(body);
-            console.log("HTTP-SEND done!");
-        });
     });
 }
