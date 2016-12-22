@@ -25,7 +25,7 @@ function updateState(jsonMessage) {
 
   http.get({
         host: baseUrl,
-        path: "/fhem?cmd." + device + "=set " + device + " " + state
+        path: encodeUri("/fhem?cmd." + device + "=set " + device + " " + state)
     }, function(response) {
         var body = '';
         response.on('data', function(d) {
