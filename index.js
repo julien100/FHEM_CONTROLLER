@@ -3,6 +3,8 @@ const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://localhost');
 const baseUrl = "localhost:8083";
 var http = require('http');
+const querystring = require('querystring');
+
 
 
 client.on('connect', () => {
@@ -25,7 +27,7 @@ function updateState(jsonMessage) {
 
   http.get({
         host: baseUrl,
-        path: encodeUri("/fhem?cmd." + device + "=set " + device + " " + state)
+        path: querystring.stringify("/fhem?cmd." + device + "=set " + device + " " + state)
     }, function(response) {
         var body = '';
         response.on('data', function(d) {
