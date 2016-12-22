@@ -24,10 +24,11 @@ client.on('message', (topic, message) => {
 function updateState(jsonMessage) {
   var device = jsonMessage.device;
   var state = jsonMessage.state;
+  var path = querystring.stringify("/fhem?cmd." + device + "=set " + device + " " + state);
 
   http.get({
         host: baseUrl,
-        path: querystring.stringify("/fhem?cmd." + device + "=set " + device + " " + state)
+        path: path
     }, function(response) {
         var body = '';
         response.on('data', function(d) {
