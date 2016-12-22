@@ -25,7 +25,7 @@ function updateState(jsonMessage) {
   var device = jsonMessage.device;
   var state = jsonMessage.state;
   var path = querystring.stringify("/fhem?cmd." + device + "=set " + device + " " + state);
-  console.log(path);
+  console.log("Path:" + path);
   http.get({
         host: baseUrl,
         path: path
