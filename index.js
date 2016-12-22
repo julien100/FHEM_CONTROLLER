@@ -20,6 +20,7 @@ client.on('message', (topic, message) => {
       updateState({device: "KU.STECKDOSE_1", state: jsonMessage.state});
     } else if (jsonMessage.device === 'house') {
       if (jsonMessage.state === 'good morning') {
+        console.log("Set house state to " + jsonMessage.state);
         updateState({device: "KU.STECKDOSE_1", state: "on"});
       }
     }
