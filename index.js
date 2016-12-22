@@ -18,6 +18,10 @@ client.on('message', (topic, message) => {
     var jsonMessage = JSON.parse(stringMessage);
     if (jsonMessage.device === 'powernode') {
       updateState({device: "KU.STECKDOSE_1", state: jsonMessage.state});
+    } else if (jsonMessage.device === 'house') {
+      if (jsonMessage.state === 'good morning') {
+        updateState({device: "KU.STECKDOSE_1", state: "on"});
+      }
     }
   }
 });
