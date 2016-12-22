@@ -2,6 +2,7 @@
 const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://localhost');
 const baseUrl = "localhost:8083";
+var http = require('http');
 
 
 client.on('connect', () => {
@@ -21,8 +22,18 @@ client.on('message', (topic, message) => {
 function updateState(jsonMessage) {
   var device = jsonMessage.device;
   var state = jsonMessage.state;
-  var theUrl = baseUrl + "/fhem?cmd." + device + "=set " + device + " " + state;
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", theUrl, true);
-  xmlHttp.send();
+
+  http.get({
+        host: baseUrl,
+        path: "/fhem?cmd." + device + "=set " + device + " " + statev
+    }, function(response) {
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            var parsed = JSON.parse(body);
+            console.log("HTTP-SEND done!");
+        });
+    });
 }
